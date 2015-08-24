@@ -1,12 +1,12 @@
 {
   "name": "property-seek",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "files": [
     "index.js"
   ],
   "license": "Apache-2.0",
-  "scripts":{
-    "test":"./node_modules/.bin/mocha test.js"
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test.js"
   },
   "description": "Access object properties with dot and bracket support.",
   "repository": {
