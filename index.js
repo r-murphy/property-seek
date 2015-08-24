@@ -19,13 +19,15 @@ function unescape_dots(value) {
 	return value.split('&&').join('.');
 }
 
+function partify(value) {
+	if (!value) return '';
+	return escape_dots(strip_braces(boundary_to_dot('' + value))).split('.');
+}
+
 exports.get = function(o, path) {
 
-	if (!path) return;
-
-	var parts = escape_dots(strip_braces(boundary_to_dot('' + path))).split('.');
-
-	if (parts.length === 1) return o[parts[0]];
+	var parts = partify(path);
+	if (parts.length === 1) return o[unescape_dots(parts[0])];
 	if (parts.length === 0) return;
 
 	var first = o[parts.shift()];
@@ -36,11 +38,19 @@ exports.get = function(o, path) {
 	}, first);
 };
 
-exports.set = function (obj, path, value) {
-  var segs = path.split('.');
-  segs.reduce(function set(deep, seg, i) {
-    return deep[seg] = segs.length - 1 === i ? deep[seg] = value : deep[seg] || {};
-  }, obj);
+exports.set = function(obj, path, value) {
+	var parts = partify(path);
+	parts.reduce(function(target, prop, i) {
+		prop = unescape_dots(prop);
+		if (parts.length - 1 === i) {
+			target[prop] = value;
+		} else {
+			target[prop] = target[prop] || {};
+		}
+		return target[prop];
 
-  return obj;
+
+	}, obj);
+
+	return obj;
 };

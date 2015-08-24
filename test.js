@@ -1,4 +1,4 @@
-var Properties = require('..');
+var Properties = require('./');
 var must = require('must');
 
 describe('property-seek', function() {
@@ -8,15 +8,20 @@ describe('property-seek', function() {
 			name: {
 				first: 'Joe',
 				last: 'M',
+				'dot.name': 'Joe.M',
 				status: {
 					banned: true
 				}
-			}
+			},
+			'dot.value': '...'
 		};
 		must(Properties.get(user, 'name')).be.an.object();
 		must(Properties.get(user, 'name.first')).equal('Joe');
 		must(Properties.get(user, 'name.last')).equal('M');
 		must(Properties.get(user, 'name.status.banned')).equal(true);
+		must(Properties.get(user, 'name[status][banned]')).equal(true);
+				must(Properties.get(user, '\'dot.value\'')).equal('...');
+		must(Properties.get(user, 'name[\'dot.name\']')).equal('Joe.M');
 		must(Properties.get(user, 'nam')).be.undefined();
 	});
 
@@ -38,7 +43,10 @@ describe('property-seek', function() {
 		must(user.name.middle).equal('H');
 		Properties.set(user, 'name', 'Bob');
 		must(user.name).equal('Bob');
-		Properties.set(user, 'location.address', 'Sydney');
-		must(user.location.address).equal('Sydney');
+		Properties.set(user, 'location.address', 'Mt. Hope');
+		must(user.location.address).equal('Mt. Hope');
+		Properties.set(user, 'location[\'address\']', 'Arima');
+		must(user.location.address).equal('Arima');
+
 	});
 });

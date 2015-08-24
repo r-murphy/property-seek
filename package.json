@@ -5,6 +5,9 @@
     "index.js"
   ],
   "license": "Apache-2.0",
+  "scripts":{
+    "test":"./node_modules/.bin/mocha test.js"
+  },
   "description": "Access object properties with dot and bracket support.",
   "repository": {
     "type": "git",
