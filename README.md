@@ -1,9 +1,9 @@
-# dot-access
+# property-seek
 
-  Access object properties using dot notation.
+ Access object properties with dot and bracket support.
   
-  ```js
-  var dotAccess = require('dot-access');
+  ```javascript
+  var Properties = require('property-seek');
   
   var user = { 
     fullname: { 
@@ -13,22 +13,16 @@
   };
   
   // get
-  dotAccess.get(user, 'fullname.first'); // 'Joe'
+  Properties.get(user, 'fullname.first'); // 'Joe'
   
   // or set
-  dotAccess.set(user, 'fullname.last', 'T'); // 'T'
+  Properties.set(user, 'fullname.last', 'T'); // 'T'
   ```
 
 ## Installation
 
-  Install with [component(1)](http://component.io):
-
-    $ component install nthtran/dot-access
-
-## API
-
-
+ $ npm install --save property-seek
 
 ## License
 
-  MIT
+  Apache2

@@ -1,11 +1,17 @@
 {
-  "name": "dot-access",
-  "version": "1.0.0",
+  "name": "property-seek",
+  "version": "0.0.1",
+  "files": [
+    "index.js"
+  ],
+  "license": "Apache-2.0",
+  "description": "Access object properties with dot and bracket support.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nthtran/dot-access.git"
+    "url": "https://github.com/metasansana/property-seek.git"
   },
   "devDependencies": {
-    "chai": "*"
+    "mocha": "^2.2.5",
+    "must": "^0.12.0"
   }
 }
