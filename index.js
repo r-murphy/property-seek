@@ -24,7 +24,7 @@ function partify(value) {
 	return escape_dots(strip_braces(boundary_to_dot('' + value))).split('.');
 }
 
-exports.get = function(o, path) {
+var get = function(o, path) {
 
 	var parts = partify(path);
 	if (parts.length === 1) return o[unescape_dots(parts[0])];
@@ -38,7 +38,7 @@ exports.get = function(o, path) {
 	}, first);
 };
 
-exports.set = function(obj, path, value) {
+get.set = function(obj, path, value) {
 	var parts = partify(path);
 	parts.reduce(function(target, prop, i) {
 		prop = unescape_dots(prop);
@@ -54,3 +54,6 @@ exports.set = function(obj, path, value) {
 
 	return obj;
 };
+
+module.exports = get;
+module.exports.get = get;
