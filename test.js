@@ -60,7 +60,7 @@ describe('property-seek', function() {
             }
         }, 'the.zero.value')).be(0)
 
-     must(Properties.get({
+        must(Properties.get({
             the: {
                 zero: {
                     value: '0'
@@ -68,7 +68,21 @@ describe('property-seek', function() {
             }
         }, 'the.zero.value')).be('0')
 
+    });
 
+    it('should delete the correct value at the correct path', function() {
+      var user = {
+          name: {
+              first: 'Joe',
+              last: 'M',
+              status: {
+                  banned: true
+              }
+          }
+      };
+      Properties.delete(user, 'name.last');
+
+      must(user.name.hasOwnProperty('last')).be(false);
 
     });
 

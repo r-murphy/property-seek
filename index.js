@@ -55,5 +55,22 @@ get.set = function(obj, path, value) {
     return obj;
 };
 
+get.delete = function(obj, path, value) {
+    var parts = partify(path);
+    parts.reduce(function(target, prop, i) {
+        prop = unescape_dots(prop);
+        if (parts.length - 1 === i) {
+            delete target[prop];
+        } else {
+            target[prop] = target[prop] || {};
+        }
+        return target[prop];
+
+
+    }, obj);
+
+    return obj;
+};
+
 module.exports = get;
 module.exports.get = get;
